@@ -251,7 +251,7 @@ phasee=0
 unset phase_setting
 unset thruster
 
-until [[ ${phasea} -gt 4 || ${phaseb} -gt 4 || ${phasec} -gt 4 || ${phased} -gt 4 || ${phasee} -gt 4 ]]; do
+until [[ ${phasee} -gt 4 ]]; do
   for phase in ${phasea} ${phaseb} ${phasec} ${phased} ${phasee}; do
     compute
   done
@@ -275,7 +275,14 @@ until [[ ${phasea} -gt 4 || ${phaseb} -gt 4 || ${phasec} -gt 4 || ${phased} -gt 
   fi
 done
 
-echo ${phase_setting[@]}
-echo ${#phase_setting[@]}
-echo ${thruster[@]}
-echo ${#thruster[@]}
+max=${thruster[0]}
+for m in ${thruster[@]} ; do
+  ((m > max)) && max=$m
+done
+
+for i in ${!thruster[@]}; do
+  if [[ ${thruster[${i}]} == ${max} ]]; then
+    echo ${phase_setting[${i}]}
+    break
+  fi
+done
