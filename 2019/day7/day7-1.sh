@@ -243,39 +243,39 @@ compute(){
 }
 
 output=0
-a=0
-b=0
-c=0
-d=0
-e=0
+phasea=0
+phaseb=0
+phasec=0
+phased=0
+phasee=0
 unset phase_setting
 unset thruster
 
-while [[ ${a} -le 4 && ${b} -le 4 && ${c} -le 4 && ${d} -le 4 && ${e} -le 4 ]]; do
-  for phase in ${a} ${b} ${c} ${d} ${e}; do
+while [[ ${phasea} -le 4 && ${phaseb} -le 4 && ${phasec} -le 4 && ${phased} -le 4 && ${phasee} -le 4 ]]; do
+  for phase in ${phasea} ${phaseb} ${phasec} ${phased} ${phasee}; do
     compute
-    phase_setting+=(${a}${b}${c}${d}${e})
-    echo ${phase}
-    echo ${output}
+    phase_setting+=(${phasea}${phaseb}${phasec}${phased}${phasee})
+    echo "Phase: ${phase}"
+    echo "Output: ${output}"
     thruster+=(${output})
   done
-  if [[ ${a} -lt 4 ]]; then
-    ((a++))
-  elif [[ ${b} -lt 4 ]]; then
-    ((b++))
-    a=0
-  elif [[ ${c} -lt 4 ]]; then
-    ((c++))
-    b=0
-  elif [[ ${d} -lt 4 ]]; then
-    ((d++))
-    c=0
-  elif [[ ${e} -lt 4 ]]; then
-    ((e++))
-    d=0
-  fi
   output=0
-  echo $(printf %05d ${a}${b}${c}${d}${e})
+  echo "Phase Setting: $(printf %05d ${phasea}${phaseb}${phasec}${phased}${phasee})"
+  if [[ ${phasea} -lt 4 ]]; then
+    ((phasea++))
+  elif [[ ${phaseb} -lt 4 ]]; then
+    ((phaseb++))
+    phasea=0
+  elif [[ ${phasec} -lt 4 ]]; then
+    ((phasec++))
+    phaseb=0
+  elif [[ ${phased} -lt 4 ]]; then
+    ((phased++))
+    phasec=0
+  elif [[ ${phasee} -lt 4 ]]; then
+    ((phasee++))
+    phased=0
+  fi
 done
 
 echo ${phase_setting[@]}
