@@ -1,35 +1,21 @@
 #!/bin/bash
 
-unset orbiting
-sum=0
-start="YOU"
-end="SAN"
-
 find_path(){
-for i in $(grep "${orbiting}" day6.txt | grep -v "${start}"); do
-  if [ $(echo ${i} | grep "^${orbiting}") ]; then
-    options+=(${i#*)})
-  else 
-    options+=(${i%)*})
-  fi
-done
+  orbitee=${origin%)*}
+  while [ $(grep ")${orbitee}" day6.txt) ]; do
+    path+=(${orbitee%)*})
+    orbiter=$(grep ")${orbitee}" day6.txt)
+    orbitee=${orbiter%)*}
+  done
 }
 
-orbiting=$(grep "${start}" day6.txt | awk -F')' '{print $1}')
+origin="YOU"
 find_path
-for p in ${options[@]}; do
-  orbiting=${p}
-  find_path
-done
-echo ${options[@]}
+path_you=(${path[@]})
+unset path
+echo ${path_you[@]}
 
-unset options
-
-start="SAN"
-orbiting=$(grep "${start}" day6.txt | awk -F')' '{print $1}')
+origin="SAN"
 find_path
-for p in ${options2[@]}; do
-  orbiting=${p}
-  find_path
-done
-echo ${options[@]}
+path_san=(${path[@]})
+echo ${path_san[@]}
