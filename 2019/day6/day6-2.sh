@@ -13,9 +13,19 @@ origin="YOU"
 find_path
 path_you=(${path[@]})
 unset path
-echo ${path_you[@]}
 
 origin="SAN"
 find_path
 path_san=(${path[@]})
-echo ${path_san[@]}
+
+result_san=(${path_san[@]})
+for planet in ${path_you[@]}; do
+  result_san=(${result_san[@]/*${planet}*/})
+done
+
+result_you=(${path_you[@]})
+for planet in ${path_san[@]}; do
+  result_you=(${result_you[@]/*${planet}*/})
+done
+
+echo $((${#result_you[@]}+${#result_san[@]}-2))
