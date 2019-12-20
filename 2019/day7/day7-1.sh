@@ -243,36 +243,37 @@ compute(){
 }
 
 output=0
-phasea=0
-phaseb=0
-phasec=0
-phased=0
-phasee=0
+startsignal="1234"
+endsignal="43210"
+#phasea=0
+#phaseb=0
+#phasec=0
+#phased=0
+#phasee=0
 unset phase_setting
 unset thruster
 
-until [[ ${phasee} -gt 4 ]]; do
-  for phase in ${phasea} ${phaseb} ${phasec} ${phased} ${phasee}; do
-    compute
+for i in $(seq ${startsignal} ${endsignal}); do
+  count=0
+  signal=$(printf %05d ${i})
+  while [ ${count} -le 4 ]; do
+    repeat=$(echo ${signal} | grep -o ${count}'\{1,\}')
+    if [ ${#repeat} -eq 1 ]; then
+      for phase in $(echo ${signal} | sed -e 's/\(.\)/\1 /g'); do
+        echo ${phase}
+        if [[ ${phase} -gt 4 ]]; then
+          break
+        else
+          echo ${signal}
+          compute
+        fi
+      done
+      phase_setting+=(${signal})
+      thruster+=(${output})
+      output=0
+    fi
+    ((count++))
   done
-  phase_setting+=(${phasea}${phaseb}${phasec}${phased}${phasee})
-  thruster+=(${output})
-  output=0
-  if [[ ${phasea} -lt 4 ]]; then
-    ((phasea++))
-  elif [[ ${phaseb} -lt 4 ]]; then
-    ((phaseb++))
-    phasea=0
-  elif [[ ${phasec} -lt 4 ]]; then
-    ((phasec++))
-    phaseb=0
-  elif [[ ${phased} -lt 4 ]]; then
-    ((phased++))
-    phasec=0
-  else
-    ((phasee++))
-    phased=0
-  fi
 done
 
 max=${thruster[0]}
@@ -280,9 +281,11 @@ for m in ${thruster[@]} ; do
   ((m > max)) && max=$m
 done
 
+echo "Max Thruster Signal: ${max}"
+
 for i in ${!thruster[@]}; do
   if [[ ${thruster[${i}]} == ${max} ]]; then
-    echo ${phase_setting[${i}]}
+    echo "Phase Setting: ${phase_setting[${i}]}"
     break
   fi
 done
