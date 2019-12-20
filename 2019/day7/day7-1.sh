@@ -251,16 +251,13 @@ phasee=0
 unset phase_setting
 unset thruster
 
-while [[ ${phasea} -le 4 && ${phaseb} -le 4 && ${phasec} -le 4 && ${phased} -le 4 && ${phasee} -le 4 ]]; do
+until [[ ${phasea} -gt 4 || ${phaseb} -gt 4 || ${phasec} -gt 4 || ${phased} -gt 4 || ${phasee} -gt 4 ]]; do
   for phase in ${phasea} ${phaseb} ${phasec} ${phased} ${phasee}; do
     compute
-    phase_setting+=(${phasea}${phaseb}${phasec}${phased}${phasee})
-    echo "Phase: ${phase}"
-    echo "Output: ${output}"
-    thruster+=(${output})
   done
+  phase_setting+=(${phasea}${phaseb}${phasec}${phased}${phasee})
+  thruster+=(${output})
   output=0
-  echo "Phase Setting: $(printf %05d ${phasea}${phaseb}${phasec}${phased}${phasee})"
   if [[ ${phasea} -lt 4 ]]; then
     ((phasea++))
   elif [[ ${phaseb} -lt 4 ]]; then
@@ -272,11 +269,13 @@ while [[ ${phasea} -le 4 && ${phaseb} -le 4 && ${phasec} -le 4 && ${phased} -le 
   elif [[ ${phased} -lt 4 ]]; then
     ((phased++))
     phasec=0
-  elif [[ ${phasee} -lt 4 ]]; then
+  else
     ((phasee++))
     phased=0
   fi
 done
 
 echo ${phase_setting[@]}
-echo ${thuster[@]}
+echo ${#phase_setting[@]}
+echo ${thruster[@]}
+echo ${#thruster[@]}
