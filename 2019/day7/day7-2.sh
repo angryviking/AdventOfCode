@@ -29,7 +29,7 @@ compute(){
         array[${array[$((${count}+1))]}]=${phase}
         ((inputcount++))
       else
-        array[${array[$((${count}+1))]}]=${output}
+        array[${array[$((${count}+1))]}]=${signal}
       fi
       ((count+=2))
     elif [[ ${array[${count}]} == 4 ]]; then
@@ -122,9 +122,9 @@ compute(){
           ((inputcount++))
         else
           if [[ $(eval echo \${place:$((param-2)):1}) == 0 ]]; then
-            array[${array[$((${count}+1))]}]=${output}
+            array[${array[$((${count}+1))]}]=${signal}
           elif [[ $(eval echo \${place:$((param-2)):1}) == 1 ]]; then
-            array[$((${count}+1))]=${output}
+            array[$((${count}+1))]=${signal}
           fi
         fi
         ((count+=2))
@@ -243,8 +243,8 @@ compute(){
 }
 
 output=0
-startsignal="1234"
-endsignal="43210"
+startsignal="56789"
+endsignal="98765"
 unset phase_setting
 unset thruster
 
@@ -253,8 +253,8 @@ for i in $(seq ${startsignal} ${endsignal}); do
   if $(echo ${signal} | grep -q '\(.\).*\1'); then
     :
   else 
-    fours='^[0-4]+$'
-    if [[ ${signal} =~ ${fours} ]]; then
+    nums='^[5-9]+$'
+    if [[ ${signal} =~ ${nums} ]]; then
       for phase in $(echo ${signal} | sed -e 's/\(.\)/\1 /g'); do
         echo ${phase}
         compute
@@ -262,7 +262,7 @@ for i in $(seq ${startsignal} ${endsignal}); do
       echo ${signal}
       phase_setting+=(${signal})
       thruster+=(${output})
-      output=0
+      #output=0
     fi
   fi
 done

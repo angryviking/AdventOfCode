@@ -249,21 +249,20 @@ unset phase_setting
 unset thruster
 
 for i in $(seq ${startsignal} ${endsignal}); do
-  count=0
   signal=$(printf %05d ${i})
   if $(echo ${signal} | grep -q '\(.\).*\1'); then
     :
   else 
-    fours='^[0-4]+$'
-    if [[ ${signal} =~ ${fours} ]]; then
+    nums='^[0-4]+$'
+    if [[ ${signal} =~ ${nums} ]]; then
       for phase in $(echo ${signal} | sed -e 's/\(.\)/\1 /g'); do
         echo ${phase}
         compute
-    done
-    echo ${signal}
-    phase_setting+=(${signal})
-    thruster+=(${output})
-    output=0
+      done
+      echo ${signal}
+      phase_setting+=(${signal})
+      thruster+=(${output})
+      output=0
     fi
   fi
 done
