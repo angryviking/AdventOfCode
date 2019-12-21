@@ -1,20 +1,31 @@
 #!/bin/bash
 
 find_path(){
-  start=$(grep "${person}" day6.txt)
-  path+=(${start%)*})
-  while [ $(grep ")${start%)*}" day6.txt) ]; do
-    new_start=$(grep ")${start%)*}" day6.txt)
-    path+=(${new_start%)*})
-    start=(${new_start%)*})
+  orbitee=${origin%)*}
+  while [ $(grep ")${orbitee}" day6.txt) ]; do
+    path+=(${orbitee%)*})
+    orbiter=$(grep ")${orbitee}" day6.txt)
+    orbitee=${orbiter%)*}
   done
-  echo ${path[@]}
 }
 
-unset path
-person="YOU"
+origin="YOU"
 find_path
+path_you=(${path[@]})
+unset path
 
-unset path
-person="SAN"
+origin="SAN"
 find_path
+path_san=(${path[@]})
+
+result_san=(${path_san[@]})
+for planet in ${path_you[@]}; do
+  result_san=(${result_san[@]/*${planet}*/})
+done
+
+result_you=(${path_you[@]})
+for planet in ${path_san[@]}; do
+  result_you=(${result_you[@]/*${planet}*/})
+done
+
+echo $((${#result_you[@]}+${#result_san[@]}-2))
