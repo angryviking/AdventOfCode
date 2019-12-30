@@ -4,7 +4,6 @@ unset layers
 unset zeros
 unset ones
 unset twos
-unset sums
 image=$(cat day8.txt)
 size=$((25*6))
 count=0
@@ -14,7 +13,6 @@ while [ ${count} -lt $((${#image}/${size})) ]; do
   zeros+=($(echo ${layers[${count}]} | grep -o 0 | wc -l))
   ones+=($(echo ${layers[$count]} | grep -o 1 | wc -l))
   twos+=($(echo ${layers[$count]} | grep -o 2 | wc -l))
-  sums+=($((${ones[${count}]}*${twos[${count}]})))
   ((count++))
 done
 
@@ -25,7 +23,7 @@ done
 
 for i in ${!zeros[@]}; do
   if [[ ${zeros[${i}]} == ${min} ]]; then
-    echo ${sums[${i}]}
+    echo $((${ones[${i}]}*${twos[${i}]}))
     break
   fi
 done
