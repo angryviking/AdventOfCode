@@ -10,11 +10,11 @@ size=$((25*6))
 count=0
 
 while [ ${count} -lt $((${#image}/${size})) ]; do
-  layers+=(${image:(($count*$size)):$size})
-  zeros+=($(echo ${layers[$count]} | grep -o 0 | wc -l))
+  layers+=(${image:$((${count}*${size})):${size}})
+  zeros+=($(echo ${layers[${count}]} | grep -o 0 | wc -l))
   ones+=($(echo ${layers[$count]} | grep -o 1 | wc -l))
   twos+=($(echo ${layers[$count]} | grep -o 2 | wc -l))
-  sums+=($((${ones[$count]}*${twos[$count]})))
+  sums+=($((${ones[${count}]}*${twos[${count}]})))
   ((count++))
 done
 
