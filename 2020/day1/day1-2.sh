@@ -12,10 +12,10 @@ while [ ${count} -lt ${#num1[@]} ]; do
         echo $((${num1[${count}]}*${num1[${count2}]}*${num1[${count3}]}))
         exit
       else
-        count3=$((${count3}+1))
+        ((count3++))
       fi
     done
-    count2=$((${count2}+1))
+    ((count2++))
   done
-  count=$((${count}+1))
+  ((count++))
 done

@@ -7,7 +7,7 @@ find_trees() {
     if [[ ${startline} -eq 2 || $((${startline}%2)) -eq 1 ]]; then
       ((count+=${slope}))
       if [[ ${count} -gt 30 ]]; then
-        count=$((${count}-31))
+        ((count-=31))
       fi
       if [[ ${i:${count}:1} == "#" ]]; then
         ((trees++))
