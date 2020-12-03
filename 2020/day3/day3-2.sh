@@ -20,15 +20,15 @@ find_trees() {
 }
 
 product=1
-for slope in 1 3 5 7; do
-  start=2
+indent=(1 3 5 7 1)
+line=(1 1 1 1 2)
+key=0
+while [ ${key} -lt ${#indent[@]} ]; do
+  slope=${indent[${key}]}
+  start=$((${line[${key}]}+1))
   find_trees
   product=$((${trees}*${product}))
+  ((key++))
 done
-
-start=3
-slope=1
-find_trees
-product=$((${trees}*${product}))
 
 echo ${product}
