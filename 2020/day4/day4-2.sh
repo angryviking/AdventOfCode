@@ -1,16 +1,17 @@
 #!/bin/bash
+shopt -s compat31
 
 valid=0
 while read line; do
-  if [[ ${line} =~ (byr:19[2-9][0-9]|byr:200[0-2]) && \
-        ${line} =~ (iyr:201[0-9]|iyr:2020) && \
-        ${line} =~ (eyr:202[0-9]|eyr:2030) && \
-        ${line} =~ (hgt:1[5-8][0-9]cm|hgt:19[0-3]cm|hgt:59in|hgt:6[0-9]in|hgt:7[0-6]in) && \
-        ${line} =~ (hcl:'#'[0-9a-f]{6}) && \
-        ${line} =~ (ecl:amb|ecl:blu|ecl:brn|ecl:grn|ecl:gry|ecl:hzl|ecl:oth) && \
-        ${line} =~ (pid:[0-9]{9}) ]]; then
+  if [[ ${line} =~ \\bbyr:(19[2-9][0-9]|200[0-2])\\b && \
+        ${line} =~ \\biyr:20(1[0-9]|20)\\b && \
+        ${line} =~ \\beyr:20(2[0-9]|30)\\b && \
+        ${line} =~ \\bhgt:(1([5-8][0-9]|9[0-3])cm|(59|6[0-9]|7[0-6])in)\\b && \
+        ${line} =~ \\bhcl:#[0-9a-f]{6}\\b && \
+        ${line} =~ \\becl:(amb|blu|brn|grn|gry|hzl|oth)\\b && \
+        ${line} =~ \\bpid:[0-9]{9}\\b ]]; then
     ((valid++))
   fi
-done < <(awk -v RS= '$1=$1' day4.txt | awk '/byr:/ && /iyr:/ && /eyr:/ && /hgt:/ && /hcl:/ && /ecl:/ && /pid:/')
+done < <(awk -v RS= '$1=$1' day4.txt)
 
 echo ${valid}
