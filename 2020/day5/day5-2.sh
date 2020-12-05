@@ -48,7 +48,8 @@ while [ ${count} -lt ${#passes[@]} ]; do
   ((count++))
 done
 
-readarray -t sorted < <(for a in "${seatid[@]}"; do echo "$a"; done | sort -n)
+IFS=$'\n' sorted=($(sort -n <<< "${seatid[*]}"))
+unset IFS
 
 for (( i=0; i<=${#sorted[@]}; i++ )); do
   if [[ $((${sorted[${i}]}+1)) -ne ${sorted[$((${i}+1))]} ]]; then
