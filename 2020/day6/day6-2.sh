@@ -1,6 +1,9 @@
 #!/bin/bash
 
+input=day6.txt
 count=0
+linenum=1
+lastline=$(wc -l < ${input})
 while read line; do
   if [[ ${line} == "" ]]; then
     ans+=(${count})
@@ -8,7 +11,11 @@ while read line; do
   else
     ((count++))
   fi
-done < day6.txt
+  if [[ ${linenum} -eq ${lastline} ]]; then
+    ans+=(${count})
+  fi
+  ((linenum++))
+done < ${input}
 
 count=0
 sum=0
@@ -20,6 +27,6 @@ while read line; do
     fi
   done
   ((count++))
-done < <(awk -v RS= '$1=$1' day6.txt)
+done < <(awk -v RS= '$1=$1' ${input})
 
 echo ${sum}
