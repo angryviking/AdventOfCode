@@ -26,4 +26,4 @@ for ((count=${preamble}; count<${#port[@]}; count++)); do
   fi
 done
 
-echo ${not_valid[@]}
+echo ${not_valid[0]}
