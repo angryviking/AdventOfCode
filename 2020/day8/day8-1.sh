@@ -32,7 +32,7 @@ while [ ${count} -lt ${#oper[@]} ]; do
          accs+=(${count})
          dir=${arg[${count}]::1}
          num=${arg[${count}]:1}
-         ((accumulator$dir=${num}))
+         ((accumulator${dir}=${num}))
          ((count++))
          ;;
     jmp)
@@ -43,7 +43,7 @@ while [ ${count} -lt ${#oper[@]} ]; do
          jmps+=(${count})
          dir=${arg[${count}]::1}
          num=${arg[${count}]:1}
-         ((count$dir=${num}))
+         ((count${dir}=${num}))
          ;;
     *)
          echo "Something is not right here."
