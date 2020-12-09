@@ -20,8 +20,8 @@ for ((count=${preamble}; count<${#port[@]}; count++)); do
     fi
   done
   if [[ ${valid} -eq 0 ]]; then
-    not_valid+=${port[${count}]}
+    echo ${port[${count}]}
+    exit
   fi
 done
 
-echo ${not_valid[0]}
