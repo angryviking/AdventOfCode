@@ -13,10 +13,8 @@ for ((count=${preamble}; count<${#port[@]}; count++)); do
   valid=0
   for i in $(seq ${begin} ${end}); do
     number=$((${port[${count}]}-${port[${i}]}))
-    if [[ ${number} -eq ${port[${i}]} ]]; then
-      :
-    else
-      if [[ " ${port[@]:${begin}:${preamble}} " =~ " $((${port[${count}]}-${port[${i}]})) " ]]; then
+    if [[ ${number} -ne ${port[${i}]} ]]; then
+      if [[ " ${port[@]:${begin}:${preamble}} " =~ " ${number} " ]]; then
         valid=1
       fi
     fi
