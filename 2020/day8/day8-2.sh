@@ -3,8 +3,7 @@
 input=day8.txt
 
 set_array() {
-  unset oper
-  unset arg
+  unset oper arg
   count=0
   for i in $(cat ${input}); do
     if [[ $((${count}%2)) -eq 0 ]]; then
@@ -86,7 +85,5 @@ for ((n=0; n<${#oper[@]}; n++)); do
       set_array
     fi
   fi
-  unset nops
-  unset accs
-  unset jmps
+  unset nops accs jmps
 done
