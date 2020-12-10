@@ -2,7 +2,7 @@
 
 input=day8.txt
 
-set_array(){
+set_array() {
   unset oper
   unset arg
   count=0
