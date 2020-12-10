@@ -20,6 +20,8 @@ for ((i=0; i<${#sorted[@]}; i++)); do
     chain+=(${sorted[${i}]})
   done
   case ${#chain[@]} in
+    1|2)
+       ;;
     3)
        ((product*=2))
        ;;
@@ -30,6 +32,8 @@ for ((i=0; i<${#sorted[@]}; i++)); do
        ((product*=7))
        ;;
     *)
+       echo "Need more options."
+       exit
        ;;
   esac
   unset chain
