@@ -48,5 +48,3 @@ for ((count=0; count<${#port[@]}; count++ )); do
     ((place++))
   done
 done
-
-
