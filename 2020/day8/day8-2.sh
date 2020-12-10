@@ -2,7 +2,7 @@
 
 input=day8.txt
 
-reset_array(){
+set_array(){
   unset oper
   unset arg
   count=0
@@ -71,19 +71,19 @@ get_acc() {
   done
 }
 
-reset_array
+set_array
 for ((n=0; n<${#oper[@]}; n++)); do
   if [[ ${oper[${n}]} == "nop" ]]; then
     oper[${n}]=jmp
     get_acc
     if [[ ${bad} -eq 1 ]]; then
-      reset_array
+      set_array
     fi
   elif [[ ${oper[${n}]} == "jmp" ]]; then
     oper[${n}]=nop
     get_acc
     if [[ ${bad} -eq 1 ]]; then
-      reset_array
+      set_array
     fi
   fi
   unset nops
