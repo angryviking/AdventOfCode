@@ -43,5 +43,5 @@ done
 #shiny_gold=$(((1*${pale_indigo}) + (3*${pale_yellow}) + 1))
 
 # in theory, I should be able to read the variables from the output file using the source command
-source sorted.txt
+source ${output}
 echo $((${shiny_gold} -1)
