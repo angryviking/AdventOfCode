@@ -21,6 +21,7 @@ for ((i=0; i<${#sorted[@]}; i++)); do
   done
   case ${#chain[@]} in
     1|2)
+       ((product*=1))
        ;;
     3)
        ((product*=2))
