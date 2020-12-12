@@ -4,6 +4,7 @@
 # south = -x
 # east = +y
 # west = -y
+
 input=day12.txt
 x=0
 y=0
@@ -12,82 +13,125 @@ facing=east
 while read line; do
   case ${line:0:1} in
     F)
-        if [[ ${facing} == "east" ]]; then
+      case ${facing} in
+        east)
           ((y+=${line:1:${#line}}))
-        elif [[ ${facing} == "west" ]]; then
+          ;;
+        west)
           ((y-=${line:1:${#line}}))
-        elif [[ ${facing} == "north" ]]; then
+          ;;
+        north)
           ((x+=${line:1:${#line}}))
-        elif [[ ${facing} == "south" ]]; then
+          ;;
+        south)
           ((x-=${line:1:${#line}}))
-        fi
-        ;;
+          ;;
+      esac
+      ;;
     L)
-        if [[ ${line:1:${#line}} -eq 90 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=north
-          elif [[ ${facing} == "north" ]]; then
-            facing=west
-          elif [[ ${facing} == "west" ]]; then
-            facing=south
-          elif [[ ${facing} == "south" ]]; then
-            facing=east
-          fi
-        elif [[ ${line:1:${#line}} -eq 180 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=west
-          elif [[ ${facing} == "north" ]]; then
-            facing=south
-          elif [[ ${facing} == "west" ]]; then
-            facing=east
-          elif [[ ${facing} == "south" ]]; then
-            facing=north
-          fi
-        elif [[ ${line:1:${#line}} -eq 270 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=south
-          elif [[ ${facing} == "north" ]]; then
-            facing=east
-          elif [[ ${facing} == "west" ]]; then
-            facing=north
-          elif [[ ${facing} == "south" ]]; then
-            facing=west
-          fi
-        fi
-        ;;
+      case ${line:1:${#line}} in
+        90)
+          case ${facing} in
+            east)
+              facing=north
+              ;;
+            west)
+              facing=south
+              ;;
+            north)
+              facing=west
+              ;;
+            south)
+              facing=east
+              ;;
+          esac
+          ;;
+        180)
+          case ${facing} in
+            east)
+              facing=west
+              ;;
+            west)
+              facing=east
+              ;;
+            north)
+              facing=south
+              ;;
+            south)
+              facing=north
+              ;;
+          esac
+          ;;
+        270)
+          case ${facing} in
+            east)
+              facing=south
+              ;;
+            west)
+              facing=north
+              ;;
+            north)
+              facing=east
+              ;;
+            south)
+              facing=west
+              ;;
+          esac
+          ;;
+      esac
+      ;;
     R)
-        if [[ ${line:1:${#line}} -eq 90 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=south
-          elif [[ ${facing} == "north" ]]; then
-            facing=east
-          elif [[ ${facing} == "west" ]]; then
-            facing=north
-          elif [[ ${facing} == "south" ]]; then
-            facing=west
-          fi
-        elif [[ ${line:1:${#line}} -eq 180 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=west
-          elif [[ ${facing} == "north" ]]; then
-            facing=south
-          elif [[ ${facing} == "west" ]]; then
-            facing=east
-          elif [[ ${facing} == "south" ]]; then
-            facing=north
-          fi
-        elif [[ ${line:1:${#line}} -eq 270 ]]; then
-          if [[ ${facing} == "east" ]]; then
-            facing=noth
-          elif [[ ${facing} == "north" ]]; then
-            facing=west
-          elif [[ ${facing} == "west" ]]; then
-            facing=south
-          elif [[ ${facing} == "south" ]]; then
-            facing=east
-          fi
-        fi
-        ;;
+      case ${line:1:${#line}} in
+        90)
+          case ${facing} in
+            east)
+              facing=south
+              ;;
+            west)
+              facing=north
+              ;;
+            north)
+              facing=east
+              ;;
+            south)
+              facing=west
+              ;;
+          esac
+          ;;
+        180)
+          case ${facing} in
+            east)
+              facing=west
+              ;;
+            west)
+              facing=east
+              ;;
+            north)
+              facing=south
+              ;;
+            south)
+              facing=north
+              ;;
+          esac
+          ;;
+        270)
+          case ${facing} in
+            east)
+              facing=north
+              ;;
+            west)
+              facing=south
+              ;;
+            north)
+              facing=west
+              ;;
+            south)
+              facing=east
+              ;;
+          esac
+          ;;
+      esac
+      ;;
     N)
         ((x+=${line:1:${#line}}))
         ;;
