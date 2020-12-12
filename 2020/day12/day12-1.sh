@@ -10,7 +10,6 @@ y=0
 facing=east
 
 while read line; do
-#  echo ${line}
   case ${line:0:1} in
       F)
           if [[ ${facing} == "east" ]]; then
@@ -106,9 +105,6 @@ while read line; do
           exit
           ;;
   esac
-#  echo "facing=${facing}"
-#  echo "y=${y}"
-#  echo "x=${x}"
 done < ${input}
 
 echo $((${x#-} + ${y#-}))
