@@ -14,7 +14,7 @@ unset IFS
 
 product=1
 for ((i=0; i<${#sorted[@]}; i++)); do
-  chain+=(${sorted[${i}]})
+  chain=(${sorted[${i}]})
   while [[ $((${sorted[${i}]}+1)) -eq ${sorted[$((${i}+1))]} ]]; do
     ((i++))
     chain+=(${sorted[${i}]})
@@ -37,7 +37,6 @@ for ((i=0; i<${#sorted[@]}; i++)); do
        exit
        ;;
   esac
-  unset chain
 done
 
 echo ${product}
