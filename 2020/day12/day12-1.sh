@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# north = +x
-# south = -x
-# east = +y
-# west = -y
+# east = +x
+# west = -x
+# north = +y
+# south = -y
 
 input=day12.txt
 x=0
@@ -15,16 +15,16 @@ while read line; do
     F)
       case ${facing} in
         east)
-          ((y+=${line:1:${#line}}))
-          ;;
-        west)
-          ((y-=${line:1:${#line}}))
-          ;;
-        north)
           ((x+=${line:1:${#line}}))
           ;;
-        south)
+        west)
           ((x-=${line:1:${#line}}))
+          ;;
+        north)
+          ((y+=${line:1:${#line}}))
+          ;;
+        south)
+          ((y-=${line:1:${#line}}))
           ;;
       esac
       ;;
@@ -132,16 +132,16 @@ while read line; do
           ;;
       esac
       ;;
-    N)
+    E)
         ((x+=${line:1:${#line}}))
         ;;
-    S)
+    W)
         ((x-=${line:1:${#line}}))
         ;;
-    E)
+    N)
         ((y+=${line:1:${#line}}))
         ;;
-    W)
+    S)
         ((y-=${line:1:${#line}}))
         ;;
     *)

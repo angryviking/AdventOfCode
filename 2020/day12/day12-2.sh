@@ -14,8 +14,8 @@ wy=1
 while read line; do
   case ${line:0:1} in
     F)
-      sx=$(((${sx}+(${wx})*${line:1:${#line}})))
-      sy=$(((${sy}+(${wy})*${line:1:${#line}})))
+      ((sx+=${wx}*${line:1:${#line}}))
+      ((sy+=${wy}*${line:1:${#line}}))
       ;;
     L)
       case ${line:1:${#line}} in
