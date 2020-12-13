@@ -23,6 +23,6 @@ done
 
 for i in ${!times[@]}; do
   if [[ ${times[${i}]} -eq ${min} ]]; then
-   echo $((${ids[${i}]}*(${times[${i}]}-${timestamp})))
+    echo $((${ids[${i}]}*(${times[${i}]}-${timestamp})))
   fi
 done
