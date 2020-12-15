@@ -14,9 +14,9 @@ while read line; do
   for ((i=0; i<${#mask}; i++)); do
     if [[ ${mask:${i}:1} != "X" ]]; then
       binary=$(sed -E "s/^(.{${i}})${binary:${i}:1}/\1${mask:${i}:1}/" <<< ${binary})
-      mem[$address]=$((2#${binary}))
     fi
   done
+  mem[$address]=$((2#${binary}))
 done < ${input}
 
 echo $(IFS=+; echo "$((${mem[*]}))")
