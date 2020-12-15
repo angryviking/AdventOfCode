@@ -133,21 +133,21 @@ while read line; do
       esac
       ;;
     E)
-        ((x+=${line:1:${#line}}))
-        ;;
+      ((x+=${line:1:${#line}}))
+      ;;
     W)
-        ((x-=${line:1:${#line}}))
-        ;;
+      ((x-=${line:1:${#line}}))
+      ;;
     N)
-        ((y+=${line:1:${#line}}))
-        ;;
+      ((y+=${line:1:${#line}}))
+      ;;
     S)
-        ((y-=${line:1:${#line}}))
-        ;;
+      ((y-=${line:1:${#line}}))
+      ;;
     *)
-        echo "Something's not right here."
-        exit
-        ;;
+      echo "Something's not right here."
+      exit
+      ;;
   esac
 done < ${input}
 

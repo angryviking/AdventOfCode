@@ -34,7 +34,7 @@ for ((count=0; count<${#port[@]}; count++ )); do
     if [[ ${sum} -eq ${invalid} ]]; then
       max=${list_num[0]}
       for m in ${list_num[@]} ; do
-       ((m > max)) && max=$m
+        ((m > max)) && max=$m
       done
       min=${list_num[0]}
       for n in ${list_num[@]} ; do
