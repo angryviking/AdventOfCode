@@ -10,7 +10,6 @@ for i in $(tail +2 day3.txt); do
   if [[ ${i:${count}:1} == "#" ]]; then
     ((trees++))
   fi
-
 done
 
 echo ${trees}
