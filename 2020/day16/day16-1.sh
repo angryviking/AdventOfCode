@@ -17,6 +17,6 @@ while read line; do
     done < <(grep ":" ${input})
     [[ ${exists} -eq 0 ]] && sum=$((sum+${i}))
   done
-done < <(grep nearby -A$(wc -l ${input}) | grep -v nearby)
+done < <(grep nearby -A$(wc -l ${input}) | tail -n+2)
 
 echo ${sum}
