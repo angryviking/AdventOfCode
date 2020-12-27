@@ -15,9 +15,7 @@ while read line; do
         exists=1
       fi
     done < <(grep ":" ${input})
-    if [[ ${exists} -eq 0 ]]; then
-      sum=$((sum+${i}))
-    fi
+    [[ ${exists} -eq 0 ]] && sum=$((sum+${i}))
   done
 done < <(grep nearby -A$(wc -l ${input}) | grep -v nearby)
 
