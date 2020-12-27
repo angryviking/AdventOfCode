@@ -16,7 +16,6 @@ while read line; do
       fi
     done < <(grep ":" ${input})
     if [[ ${exists} -eq 0 ]]; then
-      echo ${sum}
       sum=$((sum+${i}))
     fi
   done
