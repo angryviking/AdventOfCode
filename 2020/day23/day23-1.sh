@@ -32,8 +32,6 @@ for ((count=0; count<100; count++)); do
 done
 
 for i in ${!cups[@]}; do
-  if [[ ${cups[${i}]} -eq 1 ]]; then
-    cups=(${cups[@]:${i}} ${cups[@]:0:${i}})
-  fi 
+  [[ ${cups[${i}]} -eq 1 ]] && cups=(${cups[@]:${i}} ${cups[@]:0:${i}})
 done
 sed 's/ //g' <<< ${cups[@]:1}
