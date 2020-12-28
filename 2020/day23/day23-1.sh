@@ -36,4 +36,4 @@ for i in ${!cups[@]}; do
     cups=(${cups[@]:${i}} ${cups[@]:0:${i}})
   fi 
 done
-echo ${cups[@]:1}
+sed 's/ //g' <<< ${cups[@]:1}
