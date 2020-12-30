@@ -3,10 +3,7 @@
 input=day10.txt
 diff1=0
 diff3=0
-
-for i in $(cat ${input}); do
-  adapt+=(${i})
-done
+adapt=($(cat ${input}))
 
 IFS=$'\n' sorted=($(sort -n <<< "${adapt[*]}"))
 unset IFS

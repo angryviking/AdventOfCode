@@ -1,13 +1,8 @@
 #!/bin/bash
 
 input=day10.txt
-
-for i in $(cat ${input}); do
-  adapt+=(${i})
-  if [[ ! " adapt[@] " =~ " 0 " ]]; then
-    adapt+=(0)
-  fi
-done
+adapt=($(cat ${input}))
+[[ ! " adapt[@] " =~ " 0 " ]] && adapt+=(0)
 
 IFS=$'\n' sorted=($(sort -n <<< "${adapt[*]}"))
 unset IFS
