@@ -2,10 +2,7 @@
 
 input=day9.txt
 preamble=25
-
-for i in $(cat ${input}); do
-  port+=(${i})
-done
+port=($(cat ${input}))
 
 for ((count=${preamble}; count<${#port[@]}; count++)); do
   begin=$((${count}-${preamble}))
