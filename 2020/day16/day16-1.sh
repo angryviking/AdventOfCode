@@ -8,9 +8,9 @@ while read line; do
     exists=0
     while read field; do
       elements=$(cut -d":" -f2 <<< ${field} | 
-             sed -r 's/[0-9]+-[0-9]+/{&}/g' | \
-             sed -r 's/-/../g' | \
-             sed -r 's/or//g')
+                 sed -r 's/[0-9]+-[0-9]+/{&}/g' | \
+                 sed -r 's/-/../g' | \
+                 sed -r 's/or//g')
       [[ " $(eval echo ${elements}) " =~ " ${i} " ]] && exists=1
     done < <(grep ":" ${input})
     [[ ${exists} -eq 0 ]] && sum=$((sum+${i}))
