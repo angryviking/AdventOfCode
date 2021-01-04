@@ -11,9 +11,7 @@ while read line; do
              sed -r 's/[0-9]+-[0-9]+/{&}/g' | \
              sed -r 's/-/../g' | \
              sed -r 's/or//g')
-      if [[ " $(eval echo ${elements}) " =~ " ${i} " ]]; then
-        exists=1
-      fi
+      [[ " $(eval echo ${elements}) " =~ " ${i} " ]] && exists=1
     done < <(grep ":" ${input})
     [[ ${exists} -eq 0 ]] && sum=$((sum+${i}))
   done
