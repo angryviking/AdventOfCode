@@ -25,7 +25,7 @@ for ((count=0; count<100; count++)); do
   done
 
   if [[ $((curr_cup+3)) -ge ${#tmp_cups[@]} ]]; then
-    cups=(${cups[@]:$((curr_cup))} ${cups[@]:0:$((curr_cup))})
+    cups=(${cups[@]:${curr_cup}} ${cups[@]:0:${curr_cup}})
     curr_cup=0
   fi
 
