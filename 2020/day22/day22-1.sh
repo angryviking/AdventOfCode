@@ -26,12 +26,12 @@ while true; do
   if [[ ${player1[0]} -gt ${player2[0]} ]]; then
     player1+=(${player1[0]})
     player1+=(${player2[0]})
-    player1=("${player1[@]:1}")
-    player2=("${player2[@]:1}")
+    player1=(${player1[@]:1})
+    player2=(${player2[@]:1})
   else
     player2+=(${player2[0]})
     player2+=(${player1[0]})
-    player2=("${player2[@]:1}")
-    player1=("${player1[@]:1}")  
+    player2=(${player2[@]:1})
+    player1=(${player1[@]:1})  
   fi 
 done

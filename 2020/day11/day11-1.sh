@@ -52,22 +52,25 @@ until [[ ${count} -eq ${newcount} ]]; do
       [[ ${seats[$((${x}+1)),$((${y}+1))]} == "#" ]] && ((full++))
       
       if [[ ${full} -eq 0 && ${seats[${x},${y}]} == "L" ]]; then
-        occupy[${x},${y}]="occupy"
+        seats[${x},${y}]="#"
+#        occupy[${x},${y}]="occupy"
       elif [[ ${full} -ge 4 && ${seats[${x},${y}]} == "#" ]]; then
-        occupy[${x},${y}]="vacate"
+        seats[${x},${y}]="L"
+#        occupy[${x},${y}]="vacate"
       else 
-        occupy[${x},${y}]="static"
+        :
+#        occupy[${x},${y}]="static"
       fi
 
     done
   done
 
-  for ((x=0; x<${height}; x++)); do
-    for ((y=0; y<${width}; y++)); do
-      [[ ${occupy[${x},${y}]} == "occupy" ]] && seats[${x},${y}]="#"
-      [[ ${occupy[${x},${y}]} == "vacate" ]] && seats[${x},${y}]="L"
-    done
-  done
+#  for ((x=0; x<${height}; x++)); do
+#    for ((y=0; y<${width}; y++)); do
+#      [[ ${occupy[${x},${y}]} == "occupy" ]] && seats[${x},${y}]="#"
+#      [[ ${occupy[${x},${y}]} == "vacate" ]] && seats[${x},${y}]="L"
+#    done
+#  done
 
   newcount=$(grep -o "#" <<< ${seats[@]} | wc -l)
 done
