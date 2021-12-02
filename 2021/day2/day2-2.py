@@ -1,8 +1,8 @@
 import numpy as np
 
-horizontal=0
-depth=0
-aim=0
+horizontal = 0
+depth = 0
+aim = 0
 directions = np.loadtxt("day2.txt", usecols=0, dtype=str)
 positions = np.loadtxt("day2.txt", usecols=1, dtype=int)
 

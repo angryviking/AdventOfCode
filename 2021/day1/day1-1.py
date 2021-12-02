@@ -4,7 +4,7 @@ increased = 0
 depths = np.loadtxt("day1.txt", dtype=int)
 
 for i in range(0, len(depths) - 1):
-    if (depths[i+1] > depths[i]):
+    if depths[i+1] > depths[i]:
         increased += 1
 
 print (increased)
