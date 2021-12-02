@@ -8,11 +8,11 @@ positions = np.loadtxt("day2.txt", usecols=1, dtype=int)
 
 for i in range(0, len(directions)):
     if directions[i] == 'forward':
-        horizontal=horizontal+positions[i]
-        depth=aim*positions[i]+depth
+        horizontal = horizontal+positions[i]
+        depth = aim*positions[i]+depth
     elif directions[i] == 'down':
-        aim=aim+positions[i]
+        aim = aim+positions[i]
     elif directions[i] == 'up':
-        aim=aim-positions[i] 
+        aim = aim-positions[i] 
 
 print (horizontal*depth)
